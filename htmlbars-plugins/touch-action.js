@@ -14,6 +14,7 @@
  */
 
 var touchActionSelectors = ['button', 'input', 'a', 'textarea'];
+var touchActionAttrSelectors = ['action', 'click'];
 var touchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function TouchActionSupport() {
@@ -64,6 +65,10 @@ TouchActionSupport.prototype.validate = function TouchActionSupport_validate(nod
         isFocusable = ['button', 'submit', 'text', 'file'].indexOf(type) !== -1;
       }
     }
+    
+    // Ensure the required attribute selector is enabled
+    hasAction = hasAction && touchActionAttrSelectors.indexOf('action') !== -1;
+    hasClick = hasClick && touchActionAttrSelectors.indexOf('click') !== -1;
 
     return hasClick || hasAction || isFocusable;
   }
@@ -119,6 +124,7 @@ function setConfigValues(config) {
   config = config || {};
 
   touchActionSelectors = config.touchActionSelectors || touchActionSelectors;
+  touchActionAttrSelectors = config.touchActionAttrSelectors || touchActionAttrSelectors;
   touchActionProperties = config.touchActionProperties || touchActionProperties;
 }
 

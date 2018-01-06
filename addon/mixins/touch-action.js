@@ -10,6 +10,7 @@ const {
 
 const FocusableInputTypes = ['button', 'submit', 'text', 'file'];
 const TouchActionSelectors = ['button', 'input', 'a', 'textarea'];
+const TouchActionAttrSelectors = ['action', 'click'];
 const TouchActionProperties = 'touch-action: manipulation; -ms-touch-action: manipulation; cursor: pointer;';
 
 function touchActionStyle() {
@@ -32,6 +33,7 @@ function touchActionStyle() {
 
 export default Mixin.create({
   touchActionSelectors: TouchActionSelectors,
+  touchActionAttrSelectors: TouchActionAttrSelectors,
   touchActionProperties: TouchActionProperties,
   ignoreTouchAction: false,
 
@@ -47,9 +49,9 @@ export default Mixin.create({
     const hasClick = click && click.apply;
     const hasTag = tagName !== '' || (tagName === null && hasClick);
     if (!hasTag) { return; }
-
-    let maybeApplyStyle = ignoreTouchAction === false;
-    let hasClickHandler = ignoreTouchAction === false && hasClick;
+    
+    let maybeApplyStyle = ignoreTouchAction === false && this.touchActionAttrSelectors.indexOf('action') !== -1;
+    let hasClickHandler = ignoreTouchAction === false && hasClick && this.touchActionAttrSelectors.indexOf('click') !== -1;
     let shouldApplyStyle = false;
 
     if (maybeApplyStyle) {

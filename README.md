@@ -94,6 +94,11 @@ The same properties can be overridden on the touchAction Mixin or on your compon
 Defines which elements touch-action is applied to.
 Defaults to `['button', 'input', 'a', 'textarea']`
 
+##### `touchActionAttrSelectors`
+
+Defines which elements touch-action is applied to, based on what attributes have been defined on the element.
+Defaults to `['action', 'click']`
+
 ##### `touchActionProperties`
 
 Defines the touch-action CSS style to be applied to the above selectors and `link-components`.
